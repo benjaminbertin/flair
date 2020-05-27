@@ -70,7 +70,12 @@ class Model(torch.nn.Module):
         """
         model_state = self._get_state_dict()
         log.debug("Saving every model_state item individually")
+        print("Saving embeddings")
+        torch.save({"embeddings": model_state[embeddings]}, str(model_file), pickle_protocol=4)
+        print("Saving state_dict")
+        torch.save({"state_dict": model_state[state_dict]}, str(model_file), pickle_protocol=4)
         for state in model_state:
+            print("Saving model state key={}".format(state))
             log.debug("Saving model_state key={}".format(state))
             torch.save({state: model_state[state]}, str(model_file), pickle_protocol=4)
 
