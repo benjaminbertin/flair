@@ -66,6 +66,10 @@ class Model(torch.nn.Module):
         :param model_file: the model file
         """
         model_state = self._get_state_dict()
+        log.debug("Saving every model_state item individually")
+        for state in model_state:
+            log.debug("Saving model_state key={}".format(state))
+            torch.save({state: model_state[state]}, str(model_file), pickle_protocol=4)
 
         torch.save(model_state, str(model_file), pickle_protocol=4)
 
