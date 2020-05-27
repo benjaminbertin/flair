@@ -1,3 +1,4 @@
+import logging
 import warnings
 from pathlib import Path
 
@@ -12,6 +13,8 @@ from flair import file_utils
 from flair.data import DataPoint
 from flair.datasets import DataLoader
 from flair.training_utils import Result
+
+log = logging.getLogger("flair")
 
 
 class Model(torch.nn.Module):
