@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+import os
 from typing import List, Union, Optional, Callable, Dict
 
 import numpy as np
@@ -110,7 +111,7 @@ class SequenceTagger(flair.nn.Model):
 
         self.trained_epochs: int = 0
 
-        self.embeddings = embeddings
+        SequenceTagger.embeddings = embeddings
 
         # set the dictionaries
         self.tag_dictionary: Dictionary = tag_dictionary
@@ -269,9 +270,14 @@ class SequenceTagger(flair.nn.Model):
         weights = None if "weight_dict" not in state.keys() else state["weight_dict"]
         reproject_to = None  if "reproject_to" not in state.keys() else state["reproject_to"]
 
+        if hasattr(SequenceTagger, 'embeddings'):
+            embeddings = SequenceTagger.embeddings
+        else:
+            embeddings = state["embeddings"]
+
         model = SequenceTagger(
             hidden_size=state["hidden_size"],
-            embeddings=state["embeddings"],
+            embeddings=embeddings,
             tag_dictionary=state["tag_dictionary"],
             tag_type=state["tag_type"],
             use_crf=state["use_crf"],
