@@ -230,7 +230,7 @@ class SequenceTagger(flair.nn.Model):
     def _get_state_dict(self):
         model_state = {
             "state_dict": self.state_dict(),
-            "embeddings": self.embeddings,
+            #"embeddings": self.embeddings,
             "hidden_size": self.hidden_size,
             "train_initial_hidden_state": self.train_initial_hidden_state,
             "tag_dictionary": self.tag_dictionary,

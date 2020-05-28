@@ -69,27 +69,6 @@ class Model(torch.nn.Module):
         :param model_file: the model file
         """
         model_state = self._get_state_dict()
-        log.debug("Saving every model_state item individually")
-        print("Saving use_crf")
-        torch.save({"use_crf": model_state['use_crf']}, str(model_file), pickle_protocol=4)
-        print("Saving hidden_size")
-        torch.save({"hidden_size": model_state['hidden_size']}, str(model_file), pickle_protocol=4)
-        print("Saving train_initial_hidden_state")
-        torch.save({"train_initial_hidden_state": model_state['train_initial_hidden_state']}, str(model_file), pickle_protocol=4)
-        print("Saving tag_dictionary")
-        torch.save({"tag_dictionary": model_state['tag_dictionary']}, str(model_file), pickle_protocol=4)
-        print("Saving rnn_layers")
-        torch.save({"rnn_layers": model_state['rnn_layers']}, str(model_file), pickle_protocol=4)
-        print("Saving state_dict")
-        torch.save({"state_dict": model_state['state_dict']}, str(model_file), pickle_protocol=4)
-        print("Saving embeddings")
-        torch.save({"embeddings": model_state['embeddings']}, str(model_file), pickle_protocol=4)
-        print("Saving state_dict")
-        torch.save({"state_dict": model_state['state_dict']}, str(model_file), pickle_protocol=4)
-        for state in model_state:
-            print("Saving model state key={}".format(state))
-            log.debug("Saving model_state key={}".format(state))
-            torch.save({state: model_state[state]}, str(model_file), pickle_protocol=4)
 
         torch.save(model_state, str(model_file), pickle_protocol=4)
 
